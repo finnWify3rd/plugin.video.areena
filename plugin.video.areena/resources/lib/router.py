@@ -156,7 +156,7 @@ def show_remote_list(event_type, params, param_string, locale):
     elif event_type == "subcategory":
         # List of content in the selected subcategory.
         # Yle api JWT for specific series or category.
-        api_tok = params.get("api_tok", "")
+        api_tok = yle.get_api_alphabetical_token(locale)
         # Number of expected results and offset for api query.
         offset = int(params.get("offset", "0"))
         count = int(params.get("count", "2000"))
@@ -199,13 +199,11 @@ def try_cache(param_string, locale):
 
 def get_category(path, locale):
     """ Fetches category items. """
-    url = yle.get_base_url(locale) + path
+    url = yle.get_base_url(locale) + "/" + path
+
     res = get_url_response(url)
 
-    if path == "/tv":
-        return yle.get_root_categories(res)
-
-    return yle.get_sub_categories(res)
+    return yle.get_categories(res, _type="subcategory")
 
 
 def get_series(locale, token, offset, count):
@@ -278,8 +276,6 @@ def populate_tv_channels():
 def populate_home_menu():
     """ Creates the initial addon menu items. """
     return [
-        mkdict(kodi.localize(33023), "alphabetical"),
-        mkdict(kodi.localize(33024), "category"),
         mkdict(kodi.localize(33025), "category", "/tv"),
         mkdict(kodi.localize(33026), "channel"),
         mkdict(kodi.localize(33027), "search", icon=kodi.get_icon_path("search.png")),

@@ -67,11 +67,21 @@ def get_api_stream_url(media_id):
             f"countryCode=FI&"
             f"host=areenaylefi"
             f"&app_id=player_static_prod"
-            f"&app_key=8930d72170e48303cf5f3867780d549b")
+            f"&app_key=8930d72170e48303cf5f3867780d549b&"
+            f"isPortabilityRegion=true")
+
 
 
 def get_api_list_url(content_or_packages, token, language):
     """ Constructs yle api query with supplied token (signed jwt specifying the query). """
+    return (f"https://areena.api.yle.fi/v1/ui/{content_or_packages}/list?"
+            f"token={token}&"
+            f"language={language}&"
+            f"v=9&"
+            f"client=yle-areena-web&"
+            f"app_id=areena-web-items&"
+            f"app_key=wlTs5D9OjIdeS9krPzRQR4I1PYVzoazN")
+    
     return (f"https://areena.api.yle.fi/v1/ui/{content_or_packages}/list?"
             f"token={token}&"
             f"language={language}&"
@@ -89,52 +99,38 @@ def get_api_episodes_url(token, yle_id, language):
             f"v=9&"
             f"client=yle-areena-web&"
             f"app_id=areena-web-items&"
-            f"app_key=v9No1mV0omg2BppmDkmDL6tGKw1pRFZt")
+            f"app_key=wlTs5D9OjIdeS9krPzRQR4I1PYVzoazN")
 
 
 def get_api_search_url(query, language):
     """ Constructs yle api url for a supplied search query. """
     return (f"https://areena.api.yle.fi/v1/ui/search?"
-            f"app_id=areena_web_frontend_prod&"
-            f"app_key=4622a8f8505bb056c956832a70c105d4&"
-            f"client=yle-areena-web&"
-            f"language={language}&"
-            f"v=9&"
-            f"episodes=true&"
-            f"packages=true&"
-            f"query={query}&"
-            f"service=tv&"
-            f"offset=0&limit=999")
+            f"{language}=fi&client=yle-areena-web&v=10&"
+            f"episodes=true&packages=true&query={query}&"
+            f"service=tv&offset=0&limit=999&country=FI&"
+            f"isPortabilityRegion=true&app_id=areena-web-items&"
+            f"app_key=wlTs5D9OjIdeS9krPzRQR4I1PYVzoazN")
 
 
 def get_api_alphabetical_token(locale):
     """ Returns language specific api token to access alphabetical categories. """
     return {
-    "fi": ("eyJhbGciOiJIUzI1NiJ9.eyJzb3VyY2UiOiJodHRwczovL3BhY2thZ2VzLmFwaS55bGUuZmkvdjQvcGFja2Fn"
-           "ZXMvMzAtNDg4L2FvLmpzb24_Z3JvdXBpbmc9dGl0bGUuZmkmbGFuZ3VhZ2U9ZmkiLCJwcmVzZW50YXRpb25Pd"
-           "mVycmlkZSI6Imxpc3RDYXJkIiwiYW5hbHl0aWNzIjp7ImNvbnRleHQiOnsiY29tc2NvcmUiOnsieWxlX3JlZm"
-           "VyZXIiOiJ0di52aWV3LjU3LVJ5eUpud2I5Yi5rYWlra2lfdHZfb2hqZWxtYXQuYV9vLnVudGl0bGVkX2xpc3Q"
-           "iLCJ5bGVfcGFja2FnZV9pZCI6IjMwLTQ4OCJ9fX19.3aS55Qzc98NXw3s_05dwspnKO5uKWktr8FYaDOzo1P0"),
+    "fi": ("eyJhbGciOiJIUzI1NiJ9.eyJjYXJkT3B0aW9uc1RlbXBsYXRlIjoidG9wUGlja3MiLCJzb3VyY2UiOiJodHRwczovL3Byb2dyYW1zLmFwaS55bGUuZmkvdjMvc2NoZW1hL3YxL3BhY2thZ2VzLzMwLTM3MDYvcmVjb21tZW5kYXRpb25zIiwiYW5hbHl0aWNzIjp7ImNvbnRleHQiOnsiY29tc2NvcmUiOnsieWxlX3JlZmVyZXIiOiJ0di52aWV3LjU3LTBsOGRqMWdWcC5ldHVzaXZ1LmRlZmF1bHRfdGFiLnN1b3NpdHRlbGVtbWUiLCJ5bGVfcGFja2FnZV9pZCI6IjMwLTM3MDYifX19fQ.ykQCAgPhgyUJMZ-0tWr8xzQutZow6URGdttIFJqbkxA"),
 
-    "sv": ("eyJhbGciOiJIUzI1NiJ9.eyJzb3VyY2UiOiJodHRwczovL3Byb2dyYW1zLmFwaS55bGUuZmkvdjMvc2NoZW1hL"
-           "3YxL3BhY2thZ2VzLzMwLTQ4OC9hbz9ncm91cGluZz10aXRsZS5zdiZsYW5ndWFnZT1zdiIsInByZXNlbnRhdGl"
-           "vbk92ZXJyaWRlIjoibGlzdENhcmQiLCJhbmFseXRpY3MiOnsiY29udGV4dCI6eyJjb21zY29yZSI6eyJ5bGVfc"
-           "mVmZXJlciI6InR2LnZpZXcuNTctUnl5Sm53YjliLmFsbGFfdHZfcHJvZ3JhbS5hX28udW50aXRsZWRfbGlzdCI"
-           "sInlsZV9wYWNrYWdlX2lkIjoiMzAtNDg4In19fX0.v4kayxYaMtPxseJCAKrueSHwNca7nVmvjECwMdhQMkQ")
+    "sv": ("eyJhbGciOiJIUzI1NiJ9.eyJjYXJkT3B0aW9uc1RlbXBsYXRlIjoiZnJvbnRQYWdlTWFpblBpY2tzIiwic291cmNlIjoiaHR0cHM6Ly9wcm9ncmFtcy5hcGkueWxlLmZpL3YzL3NjaGVtYS92MS9wYWNrYWdlcy8zMC05NjUvcmVjb21tZW5kYXRpb25zIiwiYW5hbHl0aWNzIjp7ImNvbnRleHQiOnsiY29tc2NvcmUiOnsieWxlX3JlZmVyZXIiOiJ0di52aWV3LjU3LTdBRWdkMnozNy5mb3JzdGFfc2lkYW4uZGVmYXVsdF90YWIudmlfcmVrb21tZW5kZXJhciIsInlsZV9wYWNrYWdlX2lkIjoiMzAtOTY1In19fX0.ulG0ZQZUz31PGbD9orHd9agAgYbI4sHxnsnwv3ZXh9Y")
             }.get(locale)
 
 
-def get_root_categories(site):
+def get_categories(site, _type="category"):
     """ Scrapes the yle areena home page menu bar for a list of categories. """
     categories = []
-    soup = Soup(site.text).find("li", {"class": "menu__item"})
-    menu_items = [x.find("a") for x in soup]
+    soup = Soup(site.text).find("script", {'id': '__NEXT_DATA__'})
+    data = json.loads(soup.text)
 
-    _type = "category"
-
-    for entry in menu_items:
-        _name = entry.text
-        _id = entry.attrs.get("href")
+    scraped = [(b['title'],b['analytics']['context']['comscore']['yle_package_id']) for b in [a['content'] for a in data['props']['pageProps']['view']['tabs']][0] if 'title' in b.keys() and 'yle_package_id' in b['analytics']['context']['comscore'].keys()]
+    for entry in scraped:
+        _name = entry[0]
+        _id = entry[1]
 
         # Discard live-tv channels, alphabetical and duplicate categories.
         if not _name or any(x in _id for x in [":", "?", "kaikki", "alla"]):
@@ -239,6 +235,26 @@ def get_alphabetical_categories(site, locale):
 
     return sort_alphabetical_categories(categories)
 
+def parse_search_results(site):
+    """ Scrapes the yle areena category page for JSON and extracts a list of subcategories. """
+    categories = []
+    soup = Soup(site.text).find("main", {"id": "maincontent"})
+    log(f"{soup}")
+    link_items = soup.find("a") #[x.find("a") for x in soup]
+    _type = "searchresult"
+
+    for entry in link_items:
+        _name = entry.text
+        _id = entry.attrs.get("href")
+
+        # Discard live-tv channels, alphabetical and duplicate categories.
+        if not _name or any(x in _id for x in [":", "?", "kaikki", "alla"]):
+            continue
+
+        api_data = kwdict(type=_type, yle_id=_id)
+        media_data = kwdict(name=_name, api_data=api_data)
+        categories.append(media_data)
+    return categories
 
 def get_category_content(site, locale, title_prefix=None):
     """ Extracts all media (programs and series lists) from the yle API JSON response. """

@@ -112,8 +112,8 @@ msgid "TV programs and movies (categories)"
 msgstr "TV-program och film (kategorier)"
 
 msgctxt "#33025"
-msgid "TV programs and movies (genres)"
-msgstr "TV-program och film (genre)"
+msgid "TV programs and movies"
+msgstr "TV-program och film"
 
 msgctxt "#33026"
 msgid "Live TV"

@@ -112,7 +112,7 @@ msgid "TV programs and movies (categories)"
 msgstr ""
 
 msgctxt "#33025"
-msgid "TV programs and movies (genres)"
+msgid "TV programs and movies"
 msgstr ""
 
 msgctxt "#33026"
